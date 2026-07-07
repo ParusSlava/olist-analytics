@@ -33,6 +33,12 @@ ORDER BY ym;
 
 --Розвідувальні запити
  --топ-10 категорій за виторгом
+-- 1. credit_card
+-- 2. boleto
+-- 3. voucher
+-- 4. debit_card
+-- 5. not_difened
+
  SELECT 
  	t.product_category_1 AS category_en,
     ROUND(SUM(oi.price), 2) AS revenue
@@ -47,6 +53,13 @@ ORDER BY ym;
 
 
 -- виторг за штатами (для карти в Tableau)
+-- Перші 5 штатів:
+-- 1. SP
+-- 2. RJ
+-- 3. MG
+-- 4. RS
+-- 5. PR
+
 SELECT
 	cu.customer_state,
     ROUND(SUM(oi.price), 2) AS revenue,
@@ -60,6 +73,8 @@ ORDER BY revenue DESC;
 
 
 -- середня оцінка (review_score) за категоріями
+-- В межах від 3,49 до 4,45
+
 SELECT
 	t.product_category_1 AS category_en,
     ROUND(AVG(r.review_score), 2) AS avg_score,
@@ -74,6 +89,8 @@ ORDER BY avg_score DESC;
 
 
 -- середній час доставки (різниця між датою купівлі і датою доставки)
+-- 12,6 днів 
+
 SELECT
 	ROUND(AVG(julianday(order_delivered_6) - julianday(order_purchase_t)), 1) AS avg_delivery_day
 FROM olist_orders_dataset 
@@ -81,6 +98,12 @@ WHERE order_status = 'delivered' AND order_delivered_6 IS NOT NULL;
 
 
 -- розподіл способів оплати
+-- 1. credit_card - 12 542 084,19 R$
+-- 2. boleto - 2 869 361,27 R$
+-- 3. voucher - 379 436, 87 R$
+-- 4. debit_card - 217 989,79 R$
+-- 5. not_difened - 0
+
 SELECT
 	payment_type,
     COUNT(*) AS n,
