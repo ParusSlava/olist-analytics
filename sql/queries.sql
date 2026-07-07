@@ -98,11 +98,13 @@ WHERE order_status = 'delivered' AND order_delivered_6 IS NOT NULL;
 
 
 -- розподіл способів оплати
--- 1. credit_card - 12 542 084,19 R$
--- 2. boleto - 2 869 361,27 R$
--- 3. voucher - 379 436, 87 R$
--- 4. debit_card - 217 989,79 R$
--- 5. not_difened - 0
+-- 1. credit_card - 12 542 084,19 BRL
+-- 2. boleto - 2 869 361,27 BRL
+-- 3. voucher - 379 436, 87 BRL
+-- 4. debit_card - 217 989,79 BRL
+-- 5. not_difened - 0 BRL
+
+-- BRL - бразильський реал (валюта Бразилії)
 
 SELECT
 	payment_type,
