@@ -45,6 +45,7 @@ ORDER BY ym;
  ORDER BY revenue DESC
  LIMIT 10;
 
+
 -- виторг за штатами (для карти в Tableau)
 SELECT
 	cu.customer_state,
@@ -56,6 +57,7 @@ JOIN olist_customers_dataset cu USING (customer_id)
 WHERE o.order_status = 'delivered'
 GROUP BY cu.customer_state
 ORDER BY revenue DESC;
+
 
 -- середня оцінка (review_score) за категоріями
 SELECT
@@ -70,3 +72,9 @@ GROUP BY category_en
 HAVING reviews > 50
 ORDER BY avg_score DESC;
 
+
+-- середній час доставки (різниця між датою купівлі і датою доставки)
+SELECT
+	ROUND(AVG(julianday(order_delivered_6) - julianday(order_purchase_t)), 1) AS avg_delivery_day
+FROM olist_orders_dataset 
+WHERE order_status = 'delivered' AND order_delivered_6 IS NOT NULL;
